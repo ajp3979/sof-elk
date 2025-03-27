@@ -14,3 +14,19 @@
        labels:
          type: microsoft365
   tags: [ 'json' ]
+
+- type: log
+  id: microsoft365-json
+  enabled: true
+  paths:
+    - /logstash/microsoft365/*/security_logs.json  # Ensure Filebeat watches all timestamped folders
+  json.keys_under_root: true
+  json.add_error_key: true
+  json.message_key: message
+  fields:
+    log_source: microsoft365
+  processors:
+    - add_labels:
+       labels:
+         type: microsoft365
+  tags: [ 'json' ]
